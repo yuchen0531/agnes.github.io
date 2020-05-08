@@ -1,0 +1,86 @@
+$colors:(
+  mainbg: #ffc600,
+  white: yellow,
+  third: green
+);
+
+html {
+  box-sizing: border-box;
+  background: map-get($colors, mainbg);
+  font-family: 'helvetica neue';
+  font-size: 20px;
+  font-weight: 200;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+@mixin center{
+  justify-content: space-between;
+  display: flex;
+}
+
+@mixin trans($pres,$x,$y,$scale,$liner){
+  transform: perspective(#{$pres}px) rotateX(#{$x}deg) translateY(#{$y}px) scale($scale);
+  background: linear-gradient(to #{$liner},  #ffffff 0%,#EFEFEF 100%);
+}
+
+input {
+  width: 100%;
+  padding: 20px;
+  color: map-get($colors, third);
+}
+
+.search-form {
+  max-width: 400px;
+  margin: 50px auto;
+}
+
+input.search {
+  margin: 0;
+  text-align: center;
+  outline: 0;
+  border: 10px solid #F7F7F7;
+  width: 120%;
+  left: -10%;
+  position: relative;
+  top: 10px;
+  z-index: 2;
+  border-radius: 5px;
+  font-size: 40px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.19);
+}
+
+.suggestions {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  /*perspective: 20px; */
+  li {
+    background: white;
+    list-style: none;
+    border-bottom: 1px solid #D8D8D8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.14);
+    margin: 0;
+    padding: 20px;
+    transition: background 0.2s;
+    display: flex;
+    justify-content: space-between;
+    text-transform: capitalize;
+    &:nth-child(even){
+      @include trans(100,3,2,1.001,bottom);
+    }
+    &:nth-child(odd){
+      @include trans(100,-3,3,1,top);
+    }
+  }
+}
+
+span.population {
+  font-size: 15px;
+}
+
+.hl {
+  background: map-get($colors, mainbg);
+}
